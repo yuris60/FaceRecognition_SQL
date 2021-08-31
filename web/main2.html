@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Face Recognition App</title>
+        <link rel="stylesheet" href="bootstrap.css">
+        <style>
+          .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+        </style>
+        <link href="cover.css" rel="stylesheet">
+        <script src="jquery.js"></script>
+        <script type="text/javascript" src="/eel.js"></script>
+        <script>
+        $(function(){
+                    $("#btn_add").click(function(){
+                        if($('#inp').val()!='' || $('#inp2').val()!='' || $('#inp3').val()!='')
+                          {
+                            eel.handleinput($("#inp").val(), $("#inp2").val(), $("#inp3").val());
+                          }
+                        else
+                        {
+                            info("Formulir masih belum lengkap");
+                        }
+                        $('#inp').val('');
+                        $('#inp2').val('');
+                        $('#inp3').val('');
+                    });
+
+                    $("#btn_detect").click(function()
+                    {
+                        eel.detect_faces();
+
+                    })
+
+                    $("#btn_train").click(function()
+                    {
+                        eel.train_images();
+
+                    })
+        });
+        </script>
+    </head>
+
+    <body class="text-center">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+          <header class="masthead mb-auto">
+            <div class="inner">
+              <h3 class="masthead-brand">Face Recognition App</h3>
+              <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">Contact</a>
+              </nav>
+            </div>
+          </header>
+
+          <main role="main" class="inner cover">
+            <img src="Logo NURI.png" style="display:none; margin-left: auto; margin-right: auto;" id = 'mAddLogo'width="200px"/>
+
+            <h2 class="cover-heading">Capture Dataset Wajah</h2>
+            <p class="lead">Silahkan isi Formulir dibawah ini dengan baik dan benar!</p>
+
+            <label>Masukkan NIM : </label>
+            <input type='text' class="form-control input-lg" id='inp' placeholder='Contoh : 14002360'>
+
+            <label>Masukkan Nama : </label>
+            <input type='text' class="form-control input-lg" id='inp2' placeholder='Contoh : Yuris Alkhalifi'>
+
+            <label>Masukkan Kelas : </label>
+            <input type='text' class="form-control input-lg" id='inp3' placeholder='Contoh : 14.3A.01'><br>
+
+            <input type='button' id='btn_add' class='btn btn-primary' value='Capture Dataset Wajah'>
+            <div style="display:none; margin-left: auto; margin-right: auto;" class="loader" align="center"  id='mSpinner'></div>
+            <img src="tick_green.png" style="display:none;  margin-left: auto; margin-right: auto;" id = 'mAddTick'width="100px"/>
+            <p id="uName" style="font-size:30px; text-align:center"></p>
+          </main>
+
+          <footer class="mastfoot mt-auto">
+            <div class="inner">
+              <p>Made With Love By : <a href="https://instagram.com/yuris60">Yuris Alkhalifi</a>.</p>
+            </div>
+          </footer>
+        </div>
+    </body>
+<script>
+                    eel.expose(detected_name);
+                    function detected_name(x) {
+                    console.log("Hello from " + x);
+                    document.getElementById('uName').innerHTML='Detected person is :'+x;
+
+                    }
+
+                    eel.expose(info);
+                    function info(x)
+                    {
+                    document.getElementById('uName').innerHTML=x;
+                    }
+
+                    eel.expose(mSpinner);
+                    function mSpinner() {
+                    var x = document.getElementById("mSpinner");
+                    if (x.style.display === "block") {
+                        x.style.display = "none";
+                    } else {
+                        x.style.display = "block";
+                    }
+                    }
+
+                    eel.expose(mAddTick);
+                    function mAddTick()
+                    {
+                    var x = document.getElementById("mAddTick");
+                    if (x.style.display === "block") {
+                        x.style.display = "none";
+                    } else {
+                        x.style.display = "block";
+                    }
+                    }
+
+                    eel.expose(mAddLogo);
+                    function mAddLogo()
+                    {
+                    var x = document.getElementById("mAddLogo");
+                    if (x.style.display === "block") {
+                        x.style.display = "none";
+                    } else {
+                        x.style.display = "block";
+                    }
+                    }
+
+
+
+</script>
+
+
+<style>
+    .loader {
+  border: 10px solid #f3f3f3; /* Light grey */
+  border-top: 10px solid #3498db; /* Blue */
+  border-bottom: 10px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+    </style>
+</html>
+
+
